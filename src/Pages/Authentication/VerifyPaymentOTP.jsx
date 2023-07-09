@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 function VerifyPaymentOTP() {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
-  const Successnotify = () => toast.sucess("Payment done");
+  const Successnotify = () => toast.success("Payment done");
   const Errornotify = () => toast.error("Invalid OTP");
   const handleOTP = () => {
     const options = {
@@ -25,8 +25,11 @@ function VerifyPaymentOTP() {
 
     axios(options)
       .then((response) => {
-        console.log(response);
-        if (response.status === 200) {
+        console.log(response.status);
+        // Successnotify();
+        // navigate("/login");
+
+        if (response.status == 200) {
           Successnotify();
           navigate("/login");
         } else {
