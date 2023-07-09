@@ -5,7 +5,7 @@ import { BiSupport, BiUser } from "react-icons/bi";
 
 function UserLeftMenuBar() {
   return (
-    <aside className="w-52 bg-[#75f07a] mt-16 shadow-md p-3   z-50 flex h-full bg-red-white ">
+    <aside className="w-52 bg-gradient-to-r from-green-500 to-green-700  mt-16 shadow-md p-3   z-50 flex h-full bg-red-white ">
       {/* open sidebar button */}
 
       {/* MINI SIDEBAR*/}

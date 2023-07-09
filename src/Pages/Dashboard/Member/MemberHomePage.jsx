@@ -28,7 +28,10 @@ function MemberHomePage() {
         );
 
         // Store the response data in state
+        console.log(response);
 
+        localStorage.setItem("profileURL", response.data.result.image);
+        localStorage.setItem("userName", response.data.result.username);
         setData(response.data.result);
       } catch (error) {
         console.error(error);

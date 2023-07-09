@@ -34,7 +34,8 @@ function EnterNewPwd() {
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
-          Successnotify();
+          // Successnotify();
+          alert("Done");
           navigate("/login");
         } else {
           Errornotify();

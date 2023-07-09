@@ -43,6 +43,7 @@ function Admin_ManageGroundComponent() {
         );
 
         // Store the response data in state
+        console.log(response);
         setData(response.data.result);
       } catch (error) {
         console.error(error);
@@ -50,7 +51,7 @@ function Admin_ManageGroundComponent() {
     };
 
     fetchData();
-  }, [data]);
+  }, []);
   // console.log(data);
 
   return (

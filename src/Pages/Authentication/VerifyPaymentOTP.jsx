@@ -30,7 +30,7 @@ function VerifyPaymentOTP() {
         // navigate("/login");
 
         if (response.status == 200) {
-          Successnotify();
+          // Successnotify();
           navigate("/login");
         } else {
           Errornotify();

@@ -2,17 +2,17 @@ import { FaCampground } from "react-icons/fa";
 import { PiUsersThreeBold } from "react-icons/pi";
 import { Link, NavLink } from "react-router-dom";
 import { BiSupport, BiUser } from "react-icons/bi";
-
+// bg-[#75f07a]
 function MemberLeftMenuBar() {
   return (
-    <aside className="w-52 bg-[#75f07a] mt-16 shadow-md p-3   z-50 flex h-full bg-red-white ">
+    <aside className="w-52 bg-gradient-to-r from-green-500 to-green-700  mt-16 shadow-lg p-3   z-50 flex h-full bg-red-white ">
       {/* open sidebar button */}
 
       {/* MINI SIDEBAR*/}
       <div className="mini mt-8 flex flex-col space-y-5 w-full  h-[calc(100vh)]">
         <div className=" flex items-center justify-center  hover:ml-4   text-gray-800  dark:hover:text-white cursor-pointer w-full bg-white shadow-sm hover:bg-gray-200  hover:border hover:border-solid p-3 rounded-full ">
           <NavLink
-            to={"/member"}
+            to={"/home/member"}
             className="text-gray-800 mr-2 buttonText font-medium"
             style={({ isActive, isPending }) => {
               return {

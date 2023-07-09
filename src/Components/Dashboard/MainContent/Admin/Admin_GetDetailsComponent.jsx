@@ -276,7 +276,7 @@ function Admin_GetDetailsComponent() {
           const options = { year: "numeric", month: "long", day: "numeric" };
           fromDate = fromDate.toLocaleDateString(undefined, options);
           toDate = toDate.toLocaleDateString(undefined, options);
-
+          // console.log(e);
           return (
             <>
               <div className="bg-white rounded-md w-2/6">
@@ -417,7 +417,9 @@ function Admin_GetDetailsComponent() {
                   <button
                     onClick={(e) => {
                       setSelectedItem(indexValue);
-                      handleDelete(e);
+                      setTimeout(() => {
+                        handleDelete(e);
+                      }, 500);
                     }}
                     className="btn bg-red-500 text-white hover:bg-red-600"
                   >

@@ -89,7 +89,7 @@ function App() {
             MEMBER ROUTES
       ****************** */}
       <Route element={<ProtectedRouteForMember />}>
-        <Route path="/member" element={<MemberHomePage />} />
+        <Route path="/home/member" element={<MemberHomePage />} />
         <Route path="/member/ground" element={<MemberGround />} />
         <Route
           path="/member/ground/details/:id"

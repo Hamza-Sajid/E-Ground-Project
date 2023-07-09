@@ -43,7 +43,7 @@ function Login() {
           if (response.data.result.isMember == "admin") {
             navigate("/admin/home");
           } else if (response.data.result.isMember == "member") {
-            navigate("/member");
+            navigate("/home/member");
           } else {
             navigate("/");
           }
