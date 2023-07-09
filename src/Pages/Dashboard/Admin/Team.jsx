@@ -105,7 +105,7 @@ function Team() {
         {/* *************************************** */}
         {/* CONTENT */}
         {/* *************************************** */}
-        <div className="w-full p-12 bg-gray-50 h-screen content transform ease-in-out duration-500 pt-20 px-2 md:px-5 pb-4 ">
+        <div className="w-full p-12 bg-gray-50 h-full content transform ease-in-out duration-500 pt-20 px-2 md:px-5 pb-4 ">
           <h2 className="headingh4 text-center text-2xl mt-12">
             Team Requests
           </h2>

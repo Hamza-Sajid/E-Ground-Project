@@ -15,7 +15,7 @@ function Support() {
   const [pending, setPendingQueries] = useState();
   const [selectedItem, setSelectedItem] = useState();
 
-  const MessageNotify = () => toast.msg("updated");
+  const MessageNotify = () => toast.success("updated");
   useEffect(() => {
     // Fetch data using Axios GET request
     const fetchData = async () => {
@@ -34,10 +34,25 @@ function Support() {
           config
         );
 
-        console.log(response);
+        // console.log(response);
         // Store the response data in state
-        setQueries(response.data.result[1]?.queries);
-        setPendingQueries(response.data.result[0]?.queries);
+        // totall 3 queries
+
+        // [0] -- resolved (2)
+
+        // [1]  -- pending (1)
+
+        if (response.data.result[0]._id == "pending") {
+          setPendingQueries(response.data.result[0]?.queries);
+          setQueries(response.data.result[1]?.queries);
+
+          // setQueries(undefined);
+          // console.log(true);
+        } else {
+          setQueries(response.data.result[0]?.queries);
+
+          setPendingQueries(response.data.result[1]?.queries);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -120,15 +135,15 @@ function Support() {
       {/* *************************************** */}
       {/* CONTENT */}
       {/* *************************************** */}
-      <div className="w-full p-12  bg-gray-50 h-screen content transform ease-in-out duration-500 pt-20 px-2 md:px-5 pb-4 ">
+      <div className="w-full p-12  bg-gray-50 h-full content transform ease-in-out duration-500 pt-20 px-2 md:px-5 pb-4 ">
         <h2 className="headingh4 p-12">Pending Queries</h2>
-        <div className="flex gap-8 justify-center items-center px-12">
+        <div className="flex flex-wrap gap-8 justify-center items-center px-12">
           {pending?.map((e, index) => {
             var indexValue = e._id;
 
             return (
               <div key={index} className="bg-white shadow-md rounded-lg ">
-                <div className="bg-green-500 p-4 flex flex-row justify-between items-center">
+                <div className="bg-green-500 p-4 flex flex-wrap  justify-between items-center">
                   <div>
                     <h3 className="text-white headingh3">{e.user.username}</h3>
                     <span className="text-white para text-sm">
@@ -163,6 +178,8 @@ function Support() {
         <h2 className="headingh4 p-12">Resolved Queries</h2>
         <div className="flex gap-8 justify-center items-center px-12">
           {queries?.map((e, index) => {
+            var indexValue = e._id;
+
             return (
               <div key={index} className="bg-white shadow-md rounded-lg ">
                 <div className="bg-green-500 p-4 flex flex-row justify-between items-center">
@@ -181,7 +198,12 @@ function Support() {
                 <p className="p-4">{e.description}</p>
 
                 <div className="w-full flex items-center justify-center mt-4 mb-2">
-                  <button className="btn bg-green-500 hover:bg-green-600 text-white">
+                  <button
+                    onClick={() => {
+                      setSelectedItem(indexValue), handleStatus(indexValue);
+                    }}
+                    className="btn bg-green-500 hover:bg-green-600 text-white"
+                  >
                     Update
                   </button>
                 </div>

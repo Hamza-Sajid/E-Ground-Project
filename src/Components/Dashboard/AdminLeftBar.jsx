@@ -16,7 +16,7 @@ function AdminLeftBar() {
     color: "red",
   };
   return (
-    <aside className="w-52 bg-[#75f07a]  mt-16 shadow-md p-3   z-50 flex h-screen bg-red-white ">
+    <aside className="w-52 bg-[#75f07a]  mt-16 shadow-md p-3   z-50 flex  h-full bg-red-white ">
       {/* open sidebar button */}
 
       {/* MINI SIDEBAR*/}

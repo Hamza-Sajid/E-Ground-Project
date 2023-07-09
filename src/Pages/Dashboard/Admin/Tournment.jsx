@@ -243,7 +243,12 @@ function Tournment() {
                     );
                   })}
                 </div>
-                <div className=" shadow-md mt-2 p-4 h-56 overflow-hidden overflow-y-scroll block">
+
+                <label htmlFor="" className="block mt-4 font-semibold mb-2">
+                  Select Team
+                </label>
+
+                <div className=" shadow-md mt-4 p-4 h-56 overflow-hidden overflow-y-scroll block">
                   <label htmlFor="" className="block mt-12">
                     Select Team 1
                   </label>
@@ -450,7 +455,7 @@ function Tournment() {
             {data?.map((e, index) => {
               const startDate = convertDateFormat(e.startDate);
               const endDate = convertDateFormat(e.endDate);
-
+              console.log(e);
               return (
                 <div
                   key={index}
@@ -468,7 +473,7 @@ function Tournment() {
                         <div className="font-semibold">
                           Ground:{" "}
                           <div className="font-normal">
-                            {e.ground == null ? "Null" : ":" + e.ground}
+                            {e.ground == null ? "Null" : ` ${e.ground.name}`}
                           </div>
                         </div>
                       </div>

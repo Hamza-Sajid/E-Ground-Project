@@ -17,6 +17,7 @@ function MemberTeam() {
   const [modal, setModal] = useState(false);
   const [modalOption, setModalOption] = useState();
   const [selectedOption, setSelectedOption] = useState("");
+  console.log(selectedOption);
   const [data, setData] = useState();
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
@@ -34,7 +35,8 @@ function MemberTeam() {
 
   useEffect(() => {
     // Fetch data using Axios GET request
-    const fetchData = async () => {d
+    const fetchData = async () => {
+      d;
       try {
         // Set the JWT token in the headers
         const token = localStorage.getItem("token");
@@ -79,6 +81,7 @@ function MemberTeam() {
       from: fromDate,
       to: toDate,
     };
+
     const jwtToken = localStorage.getItem("token");
 
     if (modalOption == "Team Request") {
@@ -174,7 +177,7 @@ function MemberTeam() {
       }
     });
   };
-  console.log(selectedItemID);
+
   return (
     <div className=" flex w-full">
       <div className=" hidden sm:block">
@@ -295,8 +298,8 @@ function MemberTeam() {
                   <input
                     type="radio"
                     name="kit"
-                    value="no"
-                    checked={selectedOption === "no"}
+                    value="yes"
+                    checked={selectedOption === "yes"}
                     onChange={handleOptionChange}
                     className="form-radio h-4 w-4 text-blue-500"
                   />
@@ -307,8 +310,8 @@ function MemberTeam() {
                   <input
                     type="radio"
                     name="kit"
-                    value="yes"
-                    checked={selectedOption === "yes"}
+                    value="no"
+                    checked={selectedOption === "no"}
                     onChange={handleOptionChange}
                     className="form-radio h-4 w-4 text-blue-500"
                   />

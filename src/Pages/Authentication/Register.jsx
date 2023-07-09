@@ -15,11 +15,12 @@ function Register() {
   });
   const [modal, setModal] = useState(false);
 
-  const notify = () => toast.info(`You selected ${membership} membership`);
+  const notify = () => toast.info(`Membership is selected`);
+  const Successnotify = () => toast.success("Registration succeded");
   const MessageNotify = () => toast.msg("User alrady exists");
   const Errornotify = () =>
     toast.error("Error valid data to continue OR email alredy exists");
-  const Successnotify = () => toast.sucess("Registration succeded");
+
   const navigate = useNavigate();
   const handleRegister = () => {
     // axios POST request
@@ -88,13 +89,15 @@ function Register() {
         console.log(response.status);
         if (response.data.code == 200) {
           navigate("/paymentotp");
+        } else {
+          alert("Email isn't registred with out system");
         }
 
         // console.log("Response:", response.data);
       })
       .catch((error) => {
         // Handle any errors that occurred during the request
-        console.error("Error:", error);
+        alert("Email isn't registred with our system");
       });
   };
   return (
@@ -280,8 +283,8 @@ function Register() {
 
                 <button
                   onClick={() => {
-                    notify();
                     setMembership("none");
+                    notify();
                   }}
                   className="btn mt-6 block m-auto bg-gray-500 text-white hover:bg-slate-800"
                 >
