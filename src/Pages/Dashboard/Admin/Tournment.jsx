@@ -127,7 +127,8 @@ function Tournment() {
       startDate: fromDate,
       endDate: toDate,
       ground: selectedGround,
-      teamRequests: [team1, team2, team3, team4, team5, team6],
+      teamRequests: [team1, team2],
+      // teamRequests: [team1, team2, team3, team4, team5, team6],
     };
 
     // Set the headers with the JWT token

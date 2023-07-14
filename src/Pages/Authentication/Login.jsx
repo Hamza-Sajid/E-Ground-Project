@@ -16,7 +16,6 @@ function Login() {
 
     const data = {
       username: userName,
-
       password: pwd,
     };
 

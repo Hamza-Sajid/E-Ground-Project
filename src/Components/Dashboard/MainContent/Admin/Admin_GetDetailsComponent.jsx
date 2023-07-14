@@ -25,7 +25,7 @@ function Admin_GetDetailsComponent() {
   const [totalParticipants, setTotalParticipants] = useState(Number);
 
   const { id } = useParams();
-  const MessageNotify = () => toast.msg("Updated");
+  const MessageNotify = () => toast.success("Updated");
   const Errornotify = () => toast.error("Delted");
   const MySwal = withReactContent(Swal);
   useEffect(() => {
@@ -48,11 +48,31 @@ function Admin_GetDetailsComponent() {
         );
 
         // Store the response data in state
-        // console.log(response.data.result[0].reservations);
-        // console.log(response);
-        setApprovedData(response.data.result[0].reservations);
-        setPendingData(response.data.result[1].reservations);
-        setRejectedData(response.data.result[2].reservations);
+        // setRejectedData(response.data.result[0].reservations);
+        // setApprovedData(response.data.result[index]);
+        // setPendingData(response.data.result[index].reservations);
+
+        if (response) {
+          for (let index = 0; index < 3; index++) {
+            if (response.data.result[index].status == "approved") {
+              setApprovedData(response.data.result[index].reservations);
+            } else if (response.data.result[index].status == "pending") {
+              setPendingData(response.data.result[index].reservations);
+            } else if (response.data.result[index].status == "rejected")
+              setRejectedData(response.data.result[index].reservations);
+          }
+        }
+
+        // if (response.data.result.length == 3) {
+
+        //   setApprovedData(response.data.result[2].reservations);
+        // }
+
+        // if (response.data.result.length == 2) {
+        //   setRejectedData(response.data.result[0].reservations);
+        //   setPendingData(response.data.result[1].reservations);
+        //   setApprovedData(response.data.result[2].reservations);
+        // }
       } catch (error) {
         console.error(error);
       }
@@ -99,7 +119,7 @@ function Admin_GetDetailsComponent() {
           };
           let selectedID = selectedItem;
           const response = await axios.put(
-            `https://ground-reservation-apis-production.up.railway.app/api/admin/reservation/${selectedID}`,
+            `https://ground-reservation-apis-production.up.railway.app/api/admin/reservation/${e}`,
             data,
             config
           );
@@ -116,8 +136,7 @@ function Admin_GetDetailsComponent() {
   };
 
   const handleDelete = (e) => {
-    e.preventDefault();
-
+    // console.log(e);
     MySwal.fire({
       buttonsStyling: "false",
       icon: "warning",
@@ -138,7 +157,7 @@ function Admin_GetDetailsComponent() {
             // console.log(selectedItem);
             const response = await axios.delete(
               "https://ground-reservation-apis-production.up.railway.app/api/admin/reservation/" +
-                selectedItem,
+                e,
               config
             );
             console.log(response);
@@ -217,7 +236,7 @@ function Admin_GetDetailsComponent() {
                 }
 
                 const string1 = JSON.stringify(fromDate);
-                console.log(string1);
+                // console.log(string1);
                 const string2 = JSON.stringify(toFormData);
 
                 // const dateString = "2023-05-30T19:00:00.000Z";
@@ -282,7 +301,7 @@ function Admin_GetDetailsComponent() {
               <div className="bg-white rounded-md w-2/6">
                 <div className="bg-white p-4 shadow-md">
                   <h5 className="float-right block bg-green-500 rounded-full p-2 text-white -mt-2 para">
-                    Approved{" "}
+                    {e.status}{" "}
                   </h5>
                   <span className="block button buttonText text-xl p-2">
                     Totall Participants
@@ -315,7 +334,8 @@ function Admin_GetDetailsComponent() {
                 <div className="mt-4 p-1 flex justify-around mb-2 ">
                   <button
                     onClick={() => {
-                      setSelectedItem(indexValue), handleStatus();
+                      handleStatus(indexValue);
+                      // setSelectedItem(indexValue), handleStatus();
                     }}
                     className="btn bg-green-500 text-white hover:bg-green-600"
                   >
@@ -332,8 +352,9 @@ function Admin_GetDetailsComponent() {
                   </button>
                   <button
                     onClick={(e) => {
-                      setSelectedItem(indexValue);
-                      handleDelete(e);
+                      // setSelectedItem(indexValue);
+                      // handleDelete(e);
+                      handleDelete(indexValue);
                     }}
                     className="btn bg-red-500 text-white hover:bg-red-600"
                   >
@@ -351,8 +372,8 @@ function Admin_GetDetailsComponent() {
 
       <div className="flex flex-wrap mt-4 gap-12 p-4 items-center justify-center">
         {approvedData?.map((e, index) => {
-          console.log("proper formated data");
-          console.log(e);
+          // console.log("proper formated data");
+          // console.log(e);
           var indexValue = e._id;
           var fromDate = new Date(e.from);
           var toDate = new Date(e.to);
@@ -366,7 +387,7 @@ function Admin_GetDetailsComponent() {
               <div key={index} className="bg-white rounded-md w-96 sm:w-2/6">
                 <div className="bg-white p-4 shadow-md">
                   <h5 className="float-right block bg-green-500 rounded-full p-2 text-white -mt-2 para">
-                    Pending
+                    {e.status}
                   </h5>
                   <span className="block button buttonText text-xl p-2">
                     Totall Participants
@@ -399,7 +420,8 @@ function Admin_GetDetailsComponent() {
                 <div className="mt-4 p-1 flex justify-around mb-2 ">
                   <button
                     onClick={() => {
-                      setSelectedItem(indexValue), handleStatus();
+                      handleStatus(indexValue);
+                      // setSelectedItem(indexValue), handleStatus();
                     }}
                     className="btn bg-green-500 text-white hover:bg-green-600"
                   >
@@ -416,10 +438,11 @@ function Admin_GetDetailsComponent() {
                   </button>
                   <button
                     onClick={(e) => {
-                      setSelectedItem(indexValue);
-                      setTimeout(() => {
-                        handleDelete(e);
-                      }, 500);
+                      handleDelete(indexValue);
+                      // setSelectedItem(indexValue);
+                      // setTimeout(() => {
+                      //   handleDelete(e);
+                      // }, 500);
                     }}
                     className="btn bg-red-500 text-white hover:bg-red-600"
                   >
@@ -437,8 +460,8 @@ function Admin_GetDetailsComponent() {
 
       <div className="flex flex-wrap mt-4 gap-12 p-4 items-center justify-center">
         {rejectedData?.map((e, index) => {
-          console.log("proper formated data");
-          console.log(e);
+          // console.log("proper formated data");
+          // console.log(e);
           var indexValue = e._id;
           var fromDate = new Date(e.from);
           var toDate = new Date(e.to);
@@ -452,7 +475,7 @@ function Admin_GetDetailsComponent() {
               <div key={index} className="bg-white rounded-md w-96 sm:w-2/6">
                 <div className="bg-white p-4 shadow-md">
                   <h5 className="float-right block bg-green-500 rounded-full p-2 text-white -mt-2 para">
-                    Pending
+                    {e.status}
                   </h5>
                   <span className="block button buttonText text-xl p-2">
                     Totall Participants
@@ -484,8 +507,10 @@ function Admin_GetDetailsComponent() {
                 </div>
                 <div className="mt-4 p-1 flex justify-around mb-2 ">
                   <button
-                    onClick={() => {
-                      setSelectedItem(indexValue), handleStatus();
+                    onClick={(e) => {
+                      // console.log(indexValue);
+                      handleStatus(indexValue);
+                      // setSelectedItem(indexValue),
                     }}
                     className="btn bg-green-500 text-white hover:bg-green-600"
                   >
@@ -502,8 +527,8 @@ function Admin_GetDetailsComponent() {
                   </button>
                   <button
                     onClick={(e) => {
-                      setSelectedItem(indexValue);
-                      handleDelete(e);
+                      // setSelectedItem(indexValue);
+                      handleDelete(indexValue);
                     }}
                     className="btn bg-red-500 text-white hover:bg-red-600"
                   >
