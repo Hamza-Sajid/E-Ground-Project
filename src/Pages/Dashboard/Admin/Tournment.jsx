@@ -152,6 +152,7 @@ function Tournment() {
       })
       .catch((error) => {
         // Handle any errors that occurred during the request
+        alert("Ground has been added");
         console.error("Error:", error);
       });
   };
